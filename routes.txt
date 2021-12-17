@@ -1,0 +1,93 @@
+/movie_name -> POST
+request -> (form data)
+    {
+        "movie_title": Titanic
+    }
+response -> JSON
+    Failure:
+    {
+        "Movie Not Found"
+    }
+    Success: (Example for Titanic)
+    {
+        "director_birth": 1954,
+        "director_name": "James Cameron",
+        "rating": 7.8,
+        "star1_birth": 1974,
+        "star1_name": "Leonardo DiCaprio",
+        "star2_birth": 1975,
+        "star2_name": "Kate Winslet",
+        "star3_birth": 1966,
+        "star3_name": "Billy Zane",
+        "star4_birth": 1948,
+        "star4_name": "Kathy Bates",
+        "title": "Titanic",
+        "votes": 1028112,
+        "year": 1997
+    }
+
+/actor_name -> POST
+request -> (form_data)
+{
+    "actor1_name": Leonardo DiCaprio
+    "actor2_name": Kate Winslet
+    "limit": 10
+}
+response -> JSON
+    Failure:
+    {
+        "Actor1/2 Not Found"
+    }
+    Success (Example for Leonardo DiCaprio)
+    [
+    {
+        "director_birth": 1954,
+        "director_name": "James Cameron",
+        "rating": 7.8,
+        "star1_birth": 1974,
+        "star1_name": "Leonardo DiCaprio",
+        "star2_birth": 1975,
+        "star2_name": "Kate Winslet",
+        "star3_birth": 1966,
+        "star3_name": "Billy Zane",
+        "star4_birth": 1948,
+        "star4_name": "Kathy Bates",
+        "title": "Titanic",
+        "votes": 1028112,
+        "year": 1997
+    },
+    {
+        "director_birth": 1965,
+        "director_name": "Sam Mendes",
+        "rating": 7.3,
+        "star1_birth": 1974,
+        "star1_name": "Leonardo DiCaprio",
+        "star2_birth": 1975,
+        "star2_name": "Kate Winslet",
+        "star3_birth": 1972,
+        "star3_name": "Christopher Fitzgerald",
+        "star4_birth": 1974,
+        "star4_name": "Jonathan Roumie",
+        "title": "Revolutionary Road",
+        "votes": 193373,
+        "year": 2008
+    },
+    {
+        "director_birth": null,
+        "director_name": "Tara Pirnia",
+        "rating": 7.1,
+        "star1_birth": 1966,
+        "star1_name": "Billy Zane",
+        "star2_birth": 1954,
+        "star2_name": "James Cameron",
+        "star3_birth": 1974,
+        "star3_name": "Leonardo DiCaprio",
+        "star4_birth": null,
+        "star4_name": "Benjamin Guggenheim",
+        "star5_birth": 1955,
+        "star5_name": "Bill Paxton",
+        "title": "Titanic: 100 Years On",
+        "votes": 29,
+        "year": 2012
+    }
+]
