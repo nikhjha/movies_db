@@ -26,7 +26,6 @@ def movie_name():
 
     ret_data = {}
     movie_title = request.form.get("movie_title")
-        
     movies_table = [a for a in cur.execute(f"SELECT * FROM movies WHERE title = '{movie_title}'")]
     if not movies_table:
         cur.close()
@@ -193,6 +192,11 @@ def actor_name():
         cur.close()
         return jsonify(ans)
 
+@app.route("/")
+def home() :
+    return render_template("index.html")
 
+if __name__ == "__main__":
+    app.run()
     
     
