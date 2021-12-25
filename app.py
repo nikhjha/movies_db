@@ -26,6 +26,7 @@ def movie_name():
 
     ret_data = {}
     movie_title = request.form.get("movie_title")
+    movie_title  = movie_title.title()
     movies_table = [a for a in cur.execute(f"SELECT * FROM movies WHERE title = '{movie_title}'")]
     if not movies_table:
         cur.close()
@@ -134,7 +135,9 @@ def actor_name():
 
     ret_data = {}
     actor1_name = request.form.get("actor1_name")
+    actor1_name = actor1_name.title()
     actor2_name = request.form.get("actor2_name")
+    actor2_name = actor2_name.title()
     limit = request.form.get("limit")
 
     people_table = [a for a in cur.execute(f"SELECT * FROM people WHERE name = '{actor1_name}'")]
