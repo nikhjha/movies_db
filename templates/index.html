@@ -1,179 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>MOVIE_DB</title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-			body {
-				background-color: rgb(0, 0, 0);
-				color: rgb(255, 255, 255);
-			}
-			.nav {
-				display: flex;
-				padding: 2rem 0rem;
-			}
-			.nav > h1 {
-				margin: 0rem 2rem;
-				font-size: 1.5rem;
-			}
-			.container {
-				width: 100%;
-				padding: 0rem 2rem;
-			}
-			.container > h1 {
-				width: 30rem;
-				margin: 1rem 0rem;
-				font-weight: 600;
-				font-size: 4rem;
-			}
-			.container-grid {
-				padding: 1rem 0rem 2rem 0rem;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 1rem;
-			}
-			:is(.input-form, .output-container, .card) {
-				box-shadow: 0px 0px 10px 5px rgb(150, 51, 255);
-				background-color: rgb(190, 91, 255);
-			}
-			.input-container {
-				padding: 0rem 2rem 2rem 2rem;
-				width: 100%;
-				display: flex;
-				justify-content: center;
-			}
-			.output-container {
-				padding: 1rem;
-				width: 100%;
-				background-color: rgb(0, 0, 0);
-				overflow-x: scroll;
-				display: grid;
-				grid-template-columns: repeat(var(--content-count), 20rem);
-				gap: 2rem;
-			}
-			.output-container::-webkit-scrollbar {
-				height: 1rem;
-			}
-			.output-container::-webkit-scrollbar-track {
-				background-color: rgb(0, 0, 0);
-			}
-			.output-container::-webkit-scrollbar-thumb {
-				border-radius: 0.5rem;
-				background-color: rgb(150, 51, 255);
-			}
-			.input-form {
-				width: 20rem;
-				height: 30rem;
-				border-radius: 1rem;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			.input-form > * {
-				margin: 0.8rem;
-			}
-			.input-form > p {
-				align-self: flex-start;
-				font-size: 1.2rem;
-			}
-			.input-group {
-				width: 100%;
-				padding: 0% 5%;
-			}
-			.input-group > input {
-				height: 2rem;
-				width: 75%;
-				padding: 0rem 0.5rem;
-			}
-			.input-group > button {
-				width: 20%;
-				height: 2rem;
-				border: 1px solid rgb(255, 255, 255);
-				border-radius: 0.2rem;
-				background-color: rgb(190, 91, 255);
-				color: rgb(255, 255, 255);
-				cursor: pointer;
-			}
-			.input-group > button:hover {
-				background-color: rgb(150, 51, 255);
-			}
-			.card {
-				width: 20rem;
-				height: 100%;
-				border-radius: 0.5rem;
-				display: flex;
-				flex-direction: column;
-				padding: 1rem;
-			}
-			.card > * {
-				margin: 0.5rem 0rem;
-			}
-			.card > h1 {
-				margin-top: 0px;
-				align-self: center;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="nav">
-			<h1>MOVIES_DB</h1>
-			<h1 style="margin-left: auto">Hrishikesh</h1>
-			<h1>Nikhil</h1>
-		</div>
-		<div class="container">
-			<h1>Welcome to Movies Database</h1>
-			<div class="container-grid">
-				<div class="input-container">
-					<div class="input-form">
-						<h1>Search Movie By</h1>
-						<p>Movie Name</p>
-						<div class="input-group">
-							<input type="text" id="movie-search-input" />
-							<button id="movie-search-btn">Search</button>
-						</div>
-						<p>Actor Name</p>
-						<div class="input-group">
-							<input type="text" id="actor-search-input" />
-							<button id="actor-search-btn">Search</button>
-						</div>
-						<p style="font-size: 1rem; width: 80%">* If you want to search with two actors please type like this Leonardo DiCaprio;Kate Winslet</p>
-						<p id="loading" style="display: none">Loading....</p>
-						<p id="error" style="background-color: rgb(250, 90, 190); color: rgb(255, 255, 255); padding: 0.5rem; display: none"></p>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MOVIE_DB</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: rgb(0, 0, 0);
+			color: rgb(255, 255, 255);
+		}
+
+		.nav {
+			display: flex;
+			padding: 2rem 0rem;
+		}
+
+		.nav>h1 {
+			margin: 0rem 2rem;
+			font-size: 1.5rem;
+		}
+
+		.container {
+			width: 100%;
+			padding: 0rem 2rem;
+		}
+
+		.container>h1 {
+			margin: 2rem 0rem;
+			font-weight: 600;
+			font-size: 4rem;
+		}
+
+		.container-grid {
+			padding: 1rem 0rem 2rem 0rem;
+			display: grid;
+			grid-template-columns: 25rem 1fr;
+			gap: 1rem;
+		}
+
+		:is(.input-form, .output-container, .card) {
+			box-shadow: 0px 0px 10px 5px rgb(150, 51, 255);
+			background-color: rgb(190, 91, 255);
+		}
+
+		.input-container {
+			width: 100%;
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		.output-container {
+			padding: 1rem;
+			width: 100%;
+			background-color: rgb(0, 0, 0);
+			overflow-x: scroll;
+			display: grid;
+			grid-template-columns: repeat(var(--content-count), 20rem);
+			gap: 2rem;
+		}
+
+		.output-container::-webkit-scrollbar {
+			height: 1rem;
+		}
+
+		.output-container::-webkit-scrollbar-track {
+			background-color: rgb(0, 0, 0);
+		}
+
+		.output-container::-webkit-scrollbar-thumb {
+			border-radius: 0.5rem;
+			background-color: rgb(150, 51, 255);
+		}
+
+		.input-form {
+			width: 20rem;
+			height: 30rem;
+			border-radius: 1rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.input-form>* {
+			margin: 0.8rem;
+		}
+
+		.input-form>p {
+			align-self: flex-start;
+			font-size: 1.2rem;
+		}
+
+		.input-group {
+			width: 100%;
+			padding: 0% 5%;
+		}
+
+		.input-group>input {
+			height: 2rem;
+			width: 75%;
+			padding: 0rem 0.5rem;
+		}
+
+		.input-group>button {
+			width: 20%;
+			height: 2rem;
+			border: 1px solid rgb(255, 255, 255);
+			border-radius: 0.2rem;
+			background-color: rgb(190, 91, 255);
+			color: rgb(255, 255, 255);
+			cursor: pointer;
+		}
+
+		.input-group>button:hover {
+			background-color: rgb(150, 51, 255);
+		}
+
+		.card {
+			width: 20rem;
+			height: 100%;
+			border-radius: 0.5rem;
+			display: flex;
+			flex-direction: column;
+			padding: 1rem;
+		}
+
+		.card>* {
+			margin: 0.5rem 0rem;
+		}
+
+		.card>h1 {
+			margin-top: 0px;
+			align-self: center;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="nav">
+		<h1>MOVIES_DB</h1>
+		<h1 style="margin-left: auto">Hrishikesh</h1>
+		<h1>Nikhil</h1>
+	</div>
+	<div class="container">
+		<h1>Welcome to Movies Database</h1>
+		<div class="container-grid">
+			<div class="input-container">
+				<div class="input-form">
+					<h1>Search Movie By</h1>
+					<p>Movie Name</p>
+					<div class="input-group">
+						<input type="text" id="movie-search-input" />
+						<button id="movie-search-btn">Search</button>
 					</div>
+					<p>Actor Name</p>
+					<div class="input-group">
+						<input type="text" id="actor-search-input" />
+						<button id="actor-search-btn">Search</button>
+					</div>
+					<p style="font-size: 1rem; width: 80%">* If you want to search with two actors please type like this
+						Leonardo DiCaprio;Kate Winslet</p>
+					<p id="loading" style="display: none">Loading....</p>
+					<p id="error"
+						style="background-color: rgb(250, 90, 190); color: rgb(255, 255, 255); padding: 0.5rem; display: none">
+					</p>
 				</div>
-				<div class="output-container"></div>
 			</div>
+			<div class="output-container"></div>
 		</div>
-		<script>
-			class MovieFetcher {
-				constructor() {
-					this.movies = [];
-					this.counts = this.movies.length;
-					this.container = document.getElementsByClassName("output-container")[0];
-					this.setContainerSize();
-					this.renderMovies();
-				}
-				setLoadingTrue() {
-					document.querySelector("#loading").style.display = "block";
-					document.querySelector("#movie-search-btn").disabled = true;
-					document.querySelector("#actor-search-btn").disabled = true;
-				}
-				setLoadingFalse() {
-					document.querySelector("#loading").style.display = "none";
-					document.querySelector("#movie-search-btn").disabled = false;
-					document.querySelector("#actor-search-btn").disabled = false;
-				}
-				renderMovies() {
-					let newCards = "";
-					this.movies.forEach((movie) => {
-						const newContent = `
+	</div>
+	<script>
+		class MovieFetcher {
+			constructor() {
+				this.movies = [];
+				this.counts = this.movies.length;
+				this.container = document.getElementsByClassName("output-container")[0];
+				this.setContainerSize();
+				this.renderMovies();
+			}
+			setLoadingTrue() {
+				document.querySelector("#loading").style.display = "block";
+				document.querySelector("#movie-search-btn").disabled = true;
+				document.querySelector("#actor-search-btn").disabled = true;
+			}
+			setLoadingFalse() {
+				document.querySelector("#loading").style.display = "none";
+				document.querySelector("#movie-search-btn").disabled = false;
+				document.querySelector("#actor-search-btn").disabled = false;
+			}
+			renderMovies() {
+				let newCards = "";
+				this.movies.forEach((movie) => {
+					const newContent = `
             <div class="card">
             <h1>Movie Details</h1>
             <p>Title : ${movie.title}</p>
@@ -183,105 +208,106 @@
             <p>Director Birth : ${movie.director_birth}</p>
             <p>Director Name : ${movie.director_name}</p>
             <h1 style="font-size: 1.2rem; margin-top: 0.5rem">Stars</h1>`;
-						newContent.split("\n").forEach((word) => {
-							newCards += word.trim();
-						});
-						let starCount = 1;
-						const getStarName = () => {
-							return `star${starCount}_name`;
-						};
-						const getStarBirth = () => {
-							return `star${starCount}_birth`;
-						};
-						while (movie[getStarName()]) {
-							newCards += `<p>${movie[getStarName()]} : Born in ${movie[getStarBirth()]}</p>`;
-							starCount += 1;
-						}
-						newCards += `</div>`;
+					newContent.split("\n").forEach((word) => {
+						newCards += word.trim();
 					});
-					this.container.innerHTML = newCards;
-				}
-				setContainerSize() {
-					this.container.style.setProperty("--content-count", this.counts);
-				}
-				setMovies(movies) {
-					this.movies = movies;
-					this.counts = this.movies.length;
-					this.setContainerSize();
-					this.renderMovies();
-				}
-				setError(data) {
-					if (data) {
-						document.querySelector("#error").style.display = "block";
-						document.querySelector("#error").innerHTML = "* " + data;
-					} else {
-						document.querySelector("#error").style.display = "none";
+					let starCount = 1;
+					const getStarName = () => {
+						return `star${starCount}_name`;
+					};
+					const getStarBirth = () => {
+						return `star${starCount}_birth`;
+					};
+					while (movie[getStarName()]) {
+						newCards += `<p>${movie[getStarName()]} : Born in ${movie[getStarBirth()]}</p>`;
+						starCount += 1;
 					}
-				}
-				async fetchByMovie(name) {
-					const formData = new FormData();
-					formData.append("movie_title", name);
-					const moviesData = await fetch("/movie_name", {
-						method: "POST",
-						body: formData,
-					});
-					const data = await moviesData.json();
-					if (data === "Movie Not Found") {
-						this.setMovies([]);
-						this.setError(data);
-						return;
-					}
-					this.setError();
-					this.setMovies([data]);
-				}
-				async fetchByActor(name) {
-					const formData = new FormData();
-					let names = name.split(";");
-					names.push("");
-					formData.append("actor1_name", names[0]);
-					formData.append("actor2_name", names[1]);
-					formData.append("limit", 10);
-					const moviesData = await fetch("/actor_name", {
-						method: "POST",
-						body: formData,
-					});
-					const data = await moviesData.json();
-					if (data === "Actor1 Not Found" || data === "Actor2 Not Found") {
-						this.setMovies([]);
-						this.setError(data);
-						return;
-					}
-					this.setError();
-					this.setMovies(data);
-				}
-				async fetch(name, by) {
-					switch (by) {
-						case "MOVIE_NAME":
-							this.setLoadingTrue();
-							await this.fetchByMovie(name);
-							this.setLoadingFalse();
-							break;
-						case "ACTOR_NAME":
-							this.setLoadingTrue();
-							await this.fetchByActor(name);
-							this.setLoadingFalse();
-							break;
-						default:
-							break;
-					}
+					newCards += `</div>`;
+				});
+				this.container.innerHTML = newCards;
+			}
+			setContainerSize() {
+				this.container.style.setProperty("--content-count", this.counts);
+			}
+			setMovies(movies) {
+				this.movies = movies;
+				this.counts = this.movies.length;
+				this.setContainerSize();
+				this.renderMovies();
+			}
+			setError(data) {
+				if (data) {
+					document.querySelector("#error").style.display = "block";
+					document.querySelector("#error").innerHTML = "* " + data;
+				} else {
+					document.querySelector("#error").style.display = "none";
 				}
 			}
-			const movie_fetcher = new MovieFetcher();
-			const movieSearchInput = document.querySelector("#movie-search-input");
-			const movieSearchBtn = document.querySelector("#movie-search-btn");
-			movieSearchBtn.addEventListener("click", () => {
-				movie_fetcher.fetch(movieSearchInput.value, "MOVIE_NAME");
-			});
-			const actorSearchInput = document.querySelector("#actor-search-input");
-			const actorSearchBtn = document.querySelector("#actor-search-btn");
-			actorSearchBtn.addEventListener("click", () => {
-				movie_fetcher.fetch(actorSearchInput.value, "ACTOR_NAME");
-			});
-		</script>
-	</body>
+			async fetchByMovie(name) {
+				const formData = new FormData();
+				formData.append("movie_title", name);
+				const moviesData = await fetch("/movie_name", {
+					method: "POST",
+					body: formData,
+				});
+				const data = await moviesData.json();
+				if (data === "Movie Not Found") {
+					this.setMovies([]);
+					this.setError(data);
+					return;
+				}
+				this.setError();
+				this.setMovies([data]);
+			}
+			async fetchByActor(name) {
+				const formData = new FormData();
+				let names = name.split(";");
+				names.push("");
+				formData.append("actor1_name", names[0]);
+				formData.append("actor2_name", names[1]);
+				formData.append("limit", 10);
+				const moviesData = await fetch("/actor_name", {
+					method: "POST",
+					body: formData,
+				});
+				const data = await moviesData.json();
+				if (data === "Actor1 Not Found" || data === "Actor2 Not Found") {
+					this.setMovies([]);
+					this.setError(data);
+					return;
+				}
+				this.setError();
+				this.setMovies(data);
+			}
+			async fetch(name, by) {
+				switch (by) {
+					case "MOVIE_NAME":
+						this.setLoadingTrue();
+						await this.fetchByMovie(name);
+						this.setLoadingFalse();
+						break;
+					case "ACTOR_NAME":
+						this.setLoadingTrue();
+						await this.fetchByActor(name);
+						this.setLoadingFalse();
+						break;
+					default:
+						break;
+				}
+			}
+		}
+		const movie_fetcher = new MovieFetcher();
+		const movieSearchInput = document.querySelector("#movie-search-input");
+		const movieSearchBtn = document.querySelector("#movie-search-btn");
+		movieSearchBtn.addEventListener("click", () => {
+			movie_fetcher.fetch(movieSearchInput.value, "MOVIE_NAME");
+		});
+		const actorSearchInput = document.querySelector("#actor-search-input");
+		const actorSearchBtn = document.querySelector("#actor-search-btn");
+		actorSearchBtn.addEventListener("click", () => {
+			movie_fetcher.fetch(actorSearchInput.value, "ACTOR_NAME");
+		});
+	</script>
+</body>
+
 </html>

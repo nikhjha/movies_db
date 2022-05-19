@@ -1,0 +1,30 @@
+{
+  "name": "movies_db",
+  "version": "1.0.0",
+  "description": "A movies searching website",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikhjha/movies_db.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikhjha/movies_db/issues"
+  },
+  "homepage": "https://github.com/nikhjha/movies_db#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.1",
+    "multer": "^1.4.4",
+    "sqlite3": "^5.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
